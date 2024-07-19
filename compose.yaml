@@ -1,0 +1,25 @@
+services:
+  server:
+    build:
+      context: .
+    ports:
+      - 8888:80
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: shark
+      MYSQL_ROOT_PASSWORD: my_secure_password  # Set your chosen password here
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./shark.sql:/docker-entrypoint-initdb.d/shark.sql
+    expose:
+      - 3306
+
+volumes:
+  db-data:
