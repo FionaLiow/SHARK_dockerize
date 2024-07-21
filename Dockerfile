@@ -15,6 +15,9 @@ COPY . /var/www/html
 
 # Set correct permissions
 RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html
+    chmod -R 755 /var/www/html && \
+	touch /var/www/html/SHARK/locale.txt && \
+    chmod 664 /var/www/html/SHARK/locale.txt && \
+    chown www-data:www-data /var/www/html/SHARK/locale.txt
 
 # Apache runs as www-data by default, so we don't need to switch users
